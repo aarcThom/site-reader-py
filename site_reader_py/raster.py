@@ -1,4 +1,21 @@
 from osgeo import gdal
+from pathlib import Path
+
+# update this list as you add more extension converters
+allowed_extensions = ['.ecw', '.sid']
+
+def check_raster_file(file_in: str) -> bool:
+    """Checks if a raster file is in the proper extension and exists
+
+    Args:
+        file_in (str): the file path
+
+    Returns:
+        bool: True if proper extension and exists
+    """
+    in_file = Path(file_in)
+    return in_file.is_file() and in_file.suffix in allowed_extensions
+
 
 def convert_raster_jpg(path_in: str, path_out: str) -> list[float]:
     """Converts raster formats such as MrSid and ECW to jpeg to be placed in Rhino.
