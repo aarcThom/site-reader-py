@@ -9,4 +9,15 @@ def test_sid():
     lrx = ulx + (dataset.RasterXSize * xres)
     lry = uly + (dataset.RasterYSize * yres)
 
+
+    scale = '-scale min_val max_val'
+    options_list = [
+    '-ot Byte',
+    '-of JPEG',
+    scale
+    ]
+
+    options_string = " ".join(options_list)
+    gdal.Translate('test.jpg', dataset, options=options_string)
+
     return f'top left pt = [{ulx}, {uly}]'
