@@ -3,7 +3,7 @@
 
 a = Analysis(
     ['sr.py'],
-    pathex=['site_reader_py'],
+    pathex=['.\site_reader'],
     binaries=[],
     datas=[
         ('venv\Lib\site-packages\osgeo\gdalplugins\gdal_ECW_JP2ECW.dll', 'osgeo\gdalplugins'),

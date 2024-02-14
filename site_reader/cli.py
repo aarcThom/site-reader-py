@@ -1,7 +1,8 @@
 import argparse
-from raster import convert_raster_jpg, check_raster_file, allowed_extensions
+from pathlib import Path
+from raster import convert_raster_jpg, check_raster_file, allowed_ext
 
-def main(command_line = None):
+def cli(command_line = None):
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(
         metavar="You should use GH, but if not, type one of these commands:", # https://stackoverflow.com/a/11809651
@@ -10,8 +11,8 @@ def main(command_line = None):
         )
 
     # raster to jpeg command
-    raster_convert = subparsers.add_parser('raster2jpeg', help=f'converts {', '.join(allowed_extensions)} to .jpeg')
-    raster_convert.add_argument('file_to_convert', help=f'The {', '.join(allowed_extensions)} file to convert')
+    raster_convert = subparsers.add_parser('raster2jpeg', help=f'converts {allowed_ext()} to .jpeg')
+    raster_convert.add_argument('file_to_convert', help=f'The {allowed_ext()} file to convert')
     raster_convert.add_argument('output_folder', help="The output folder for the .jpeg file")
 
     # a place holder - maybe will expand into something fun
@@ -25,7 +26,12 @@ def main(command_line = None):
     #raster to jpeg command
     if args.command == 'raster2jpeg':
         if not check_raster_file(args.file_to_convert):
-            raise argparse.ArgumentTypeError(f"Input doesn't exist or it isn't of type: {', '.join(allowed_extensions)}")
+            raise argparse.ArgumentTypeError(f"Input doesn't exist or it isn't of type: {allowed_ext()}")
+        if not Path(args.output_folder).is_dir:
+            raise argparse.ArgumentTypeError("You must provide a valid output directory.")
+        
+        output = convert_raster_jpg(args.file_to_convert, args.output_folder)
+        print(*output)
 
     # the place-holder
     elif args.command == 'info':
