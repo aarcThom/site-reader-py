@@ -3,11 +3,11 @@
 
 a = Analysis(
     ['sr.py'],
-    pathex=['.\site_reader'],
+    pathex=['site_reader'],
     binaries=[],
     datas=[
-        ('venv\Lib\site-packages\osgeo\gdalplugins\gdal_ECW_JP2ECW.dll', 'osgeo\gdalplugins'),
-        ('venv\Lib\site-packages\osgeo\gdalplugins\gdal_MrSID.dll', 'osgeo\gdalplugins'),
+        ('venv\\Lib\\site-packages\\osgeo\\gdalplugins\\gdal_ECW_JP2ECW.dll', 'osgeo\\gdalplugins'),
+        ('venv\\Lib\\site-packages\\osgeo\\gdalplugins\\gdal_MrSID.dll', 'osgeo\\gdalplugins'),
     ],
     hiddenimports=[],
     hookspath=[],

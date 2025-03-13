@@ -1,6 +1,6 @@
 from osgeo import gdal
 from pathlib import Path
-from utility import progress_cb
+from site_reader.progressbar import progress_cb
 
 def allowed_ext(get_list=False) -> str:
     # update this list as you add more extension converters
@@ -56,7 +56,18 @@ def convert_raster_jpg(path_in: str, path_out: str) -> list[float]:
 
     return [up_left_x, up_left_y, low_right_x, low_right_y]
 
+def gdal_setup() -> None:
+    """Setup error handling for GDAL & print standard 'do not close message to screen'.
+    """
+
+    gdal.UseExceptions() # Enable errors
+    print("======DO NOT CLOSE THIS WINDOW. IT WILL AUTOMATICALLY CLOSE.======")
+
 def convert_raster_jpg_progress(path_in: str, path_out: str) -> list[float]:
+
+    # display 'do not close message' handle errors
+    gdal_setup()
+
     file_path = Path(path_in)
     dir_path = Path(path_out).joinpath(f'{file_path.stem}.jpg').as_posix()
     file_path = file_path.as_posix()

@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-from raster import convert_raster_jpg, check_raster_file, allowed_ext, convert_raster_jpg_progress
+from site_reader.raster import convert_raster_jpg, check_raster_file, allowed_ext, convert_raster_jpg_progress
 
 def cli(command_line = None):
     parser = argparse.ArgumentParser()
